@@ -1,40 +1,14 @@
 "use strict";
-const button = document.querySelector('button');
-// const numResults: number[] = [];
-// const stringResults: string[] = [];
-const numResults = [];
-const stringResults = [];
-function add(num1, num2) {
-    if (typeof (num1) == 'number' && typeof (num2) == 'number') {
-        return num1 + num2;
-    }
-    else if (typeof (num1) == 'string' && typeof (num2) == 'string') {
-        return num1 + ' ' + num2;
-    }
-    return +num1 + +num2;
-}
-function printResult(resultObj) {
-    console.log(resultObj.val);
-    // console.log(timestamp);
-}
-button.addEventListener('click', () => {
-    const num1Elem = document.getElementById('num1');
-    const num1 = num1Elem.value;
-    const num2Elem = document.getElementById('num2');
-    const num2 = num2Elem.value;
-    const numResult = add(+num1, +num2);
-    numResults.push(numResult);
-    const stringResult = add(num1, num2);
-    stringResults.push(stringResult);
-    console.log(numResults);
-    console.log(stringResults);
-    printResult({ val: numResult, timestamp: new Date() });
-});
-const myPromise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve('It worked');
-    }, 1000);
-});
-myPromise.then((result) => {
-    console.log(result.split('w'));
-});
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+// const express = require('express');
+// import express = require('express');
+const express_1 = __importDefault(require("express"));
+const todo_1 = __importDefault(require("./routes/todo"));
+const body_parser_1 = __importDefault(require("body-parser"));
+const app = (0, express_1.default)();
+app.use(body_parser_1.default.json());
+app.use(todo_1.default);
+app.listen({ port: 3000 });
